@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>workWithObject</title>
+  </head>
+  <body>
+    <h2 id="p1"></h2>
+    <script>
+      const OBJ = {
+        name: "hessam",
+        Lname: "Mobasheri",
+        age: 27,
+        address: {
+          plate: 19,
+          st: "tohid",
+          ave: "za",
+          hood: "pas",
+          city: "teh",
+          zip: "0098",
+        },
+      };
+      let string1 = `your name is : ${OBJ.name} ${OBJ.Lname} Your address is ${OBJ.address.city}-${OBJ.address.st}`;
+      document.getElementById("p1").innerHTML = string1;
+    </script>
+  </body>
+</html>

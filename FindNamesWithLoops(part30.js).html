@@ -17,13 +17,27 @@
       ];
       let getName = prompt("Enter a name!");
       let getnumber = [];
+      //irad~ in method => esme kamel ham neveshte nashe az character peyda mikone
       for (let i = 0; i <= names.length - 1; i++) {
-        //sepratedName[i] = names[i].split('-')
         if (names[i].indexOf(getName) > -1) {
-          console.log("ok", i);
           getnumber = names[i].split("-");
-          console.log(getnumber[1]);
-        } else continue;
+          console.log(`number of ${getnumber[0]} is : ${getnumber[1]}`);
+          break;
+        } else {
+          //console.log('user not found!')
+          continue;
+        }
+      }
+      //corrected
+      for(let i = 0 ; i <= names.length;i++){
+        let spreadName=names[i].split('-');
+        if(spreadName[0]===getName){
+          console.log(`***${spreadName[0]} number : ${spreadName[1]}`);
+          break;
+        }
+        else{
+          console.log('user not found!')
+        }
       }
     </script>
   </body>

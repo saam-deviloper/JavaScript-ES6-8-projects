@@ -20,7 +20,7 @@
       const arr2 = arr1.reduce((acc, index) => acc + index);
       //console.log(arr2)
       const identi = [
-        { name: "hessam", family: "mb", marks: [3, 9, 12, 17, 20] },
+        { name: "hessam", family: "mb", marks: [3, 9, 12, 15, 20] },
         { name: "pedram", family: "mb", marks: [10, 20, 3, 8, 20] },
         { name: "amir", family: "mb", marks: [20, 12, 14, 8, 20] },
       ];
@@ -43,18 +43,11 @@
         }
       }
       //try with map
-
-      const mapIdenti = identi.map((index) => {
-          const getMarks = index.marks.reduce((acc, num) => {
-            acc + num;
-          });
-          let result = getMarks / index.marks.length;
-          index.score = result;
-        });
-      const acceptedPeople = mapIdenti.filter((index) => index.score > 12);
-      console.log(acceptedPeople, "are this ones");
-      console.log(mapIdenti);
-      //console.log(identi);
+      const newIdenti = identi.map((index) => {
+        let nomre = index.marks;
+        let ave = nomre.reduce((acc, ind) => ind + acc,0);
+        console.log(`${index.name}'s ave: `,ave/nomre.length);
+      });
     </script>
   </body>
 </html>

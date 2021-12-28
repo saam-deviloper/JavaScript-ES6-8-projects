@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      tamrin : ye araye az object ha ... <br />
+      k har user ye araye az nomre ha dare k mikhaim moadel begirim va moadel b
+      object har user ezafe she.
+    </p>
+    <p>first try with forOf - forIn-reduce</p>
+    <p>second try map-reduce</p>
+    <p>ctrl+shift+I</p>
+    <script>
+      const arr1 = [1, 2, 3, 4, 5];
+      const arr2 = arr1.reduce((acc, index) => acc + index);
+      //console.log(arr2)
+      const identi = [
+        { name: "hessam", family: "mb", marks: [3, 9, 12, 17, 20] },
+        { name: "pedram", family: "mb", marks: [10, 20, 3, 8, 20] },
+        { name: "amir", family: "mb", marks: [20, 12, 14, 8, 20] },
+      ];
+      //get access to obj keys
+      for (const item in identi) {
+        const itemA = identi[item];
+        const userMarks = itemA.marks;
+        //console.log(userMarks)
+        //access to inner array of obj
+        for (const item of userMarks) {
+          const average = itemA.marks.reduce((acc, index) => acc + index);
+          let tedad = itemA.marks.length;
+          let result = average / tedad;
+          itemA.rate = result;
+          //   let boddy = document.getElementsByTagName("body");
+          //   let tagP = document.createElement("p");
+          //   tagP.innerHTML = ` ${itemA.name} ${itemA.family} average is : ${result}`;
+          //   boddy.appendChild(tagP);
+          //console.log(` ${itemA.name} ${itemA.family} average is : ${result}`);
+        }
+      }
+      //try with map
+
+      const mapIdenti = identi.map((index) => {
+          const getMarks = index.marks.reduce((acc, num) => {
+            acc + num;
+          });
+          let result = getMarks / index.marks.length;
+          index.score = result;
+        });
+      const acceptedPeople = mapIdenti.filter((index) => index.score > 12);
+      console.log(acceptedPeople, "are this ones");
+      console.log(mapIdenti);
+      //console.log(identi);
+    </script>
+  </body>
+</html>

@@ -14,31 +14,46 @@
         "pedram-09905339622",
         "amir-09128064052",
         "shahr-09128064052",
-      ];
-      let getName = prompt("Enter a name!");
+      ]; //prompt o felan baraye edame code deactive mikonim
+      let getName = "hessam"; //prompt("Enter a name!");
       let getnumber = [];
       //irad~ in method => esme kamel ham neveshte nashe az character peyda mikone
-      for (let i = 0; i <= names.length - 1; i++) {
-        if (names[i].indexOf(getName) > -1) {
-          getnumber = names[i].split("-");
-          console.log(`number of ${getnumber[0]} is : ${getnumber[1]}`);
-          break;
-        } else {
-          //console.log('user not found!')
-          continue;
-        }
-      }
+      // for (let i = 0; i <= names.length - 1; i++) {
+      //   if (names[i].iOf(getName) > -1) {
+      //     getnumber = names[i].split("-");
+      //     console.log(`number of ${getnumber[0]} is : ${getnumber[1]}`);
+      //     break;
+      //   } else {
+      //     //console.log('user not found!')
+      //     continue;
+      //   }
+      // }
       //corrected
-      for(let i = 0 ; i <= names.length;i++){
-        let spreadName=names[i].split('-');
-        if(spreadName[0]===getName){
-          console.log(`***${spreadName[0]} number : ${spreadName[1]}`);
-          break;
+      // for (let i = 0; i <= names.length; i++) {
+      //   let spreadName = names[i].split("-");
+      //   if (spreadName[0] === getName) {
+      //     console.log(`***${spreadName[0]} number : ${spreadName[1]}`);
+      //     break;
+      //   } else {
+      //     console.log("user not found!");
+      //   }
+      // }
+    </script>
+    <ul>
+      <li>پیدا کردن جذر</li>
+      <li>moadel giri</li>
+    </ul>
+    <script>
+      const nomre = [10, 12, 15, 19, 5];
+      const moadelgiri = (score) => {
+        const scores = score;
+        let result=0;
+        for (let i = 0; i < scores.length - 1; i++) {
+          result += scores[i];
         }
-        else{
-          console.log('user not found!')
-        }
-      }
+        return result / scores.length;
+      };
+      console.log(moadelgiri(nomre));
     </script>
   </body>
 </html>

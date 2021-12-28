@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BOM</title>
+  </head>
+  <body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+
+    <script>
+      console.log(window);
+      document.getElementById("p1").innerHTML =
+        "Client date time : " + window.Date.call();
+
+      //get geolocation with google map api
+
+      function dispLoc(latitude, longitude) {
+        var request = new XMLHttpRequest();
+
+        var method = "GET";
+        var url =
+          "http://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+          latitude +
+          "," +
+          longitude +
+          "&sensor=true";
+        var async = true;
+
+        request.open(method, url, async);
+        request.onreadystatechange = function () {
+          if (request.readyState == 4 && request.status == 200) {
+            var data = JSON.parse(request.responseText);
+            var address = data.results[0];
+            return address.formatted_address;
+          }
+        };
+        request.send();
+      }
+
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      };
+      success = (position) => {
+        var coord = position.coords;
+        //console.log(`lat : ${coord.latitude} - long : ${coord.longitude}`);
+        let tagP2 = document.getElementById("p2");
+        tagP2.innerHTML =
+          `client Geolocation is : Latitude: ${coord.latitude} * Longitude: ${coord.longitude}` +
+          "بدست آوردن مختصات جفرافیایی کاربر" +
+          " " 
+          //dispLoc(coord.latitude, coord.longitude);
+      };
+      function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }
+      navigator.geolocation.getCurrentPosition(success, error, options);
+      //client screen size
+      document.getElementById("p3").innerHTML =
+        "Client screen size : " +
+        window.screen.height +
+        " height ," +
+        window.screen.width +
+        " width";
+        document.getElementById("p4").innerHTML = `inner height :  ${window.innerHeight} inner Width : ${window.innerWidth}`
+        document.getElementById("p5").innerHTML = `outer height :  ${window.outerHeight} outer Width : ${window.outerWidth}`
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      برنامه ای که لیست آبجکت ها را بگیرد و به صورت رشته ای درون لیست نمایش دهد.
+    </p>
+    <p>use DOM to change attribute of css exp.. ul.list-style-type/appendChild.firstChild,between</p>
+    <script>
+      const ul1 = document.createElement("ul");
+      const userData = [
+        { name: "hessam", age: 25 },
+        { name: "ali", age: 21 },
+        { name: "reza", age: 29 },
+      ];
+      userData.forEach(element => {
+        let li = document.createElement("li");
+        li.innerHTML = `- ${element.name} is ${element.age} years old.<span style='color:red'>&foreach</span>  `;
+        ul1.appendChild(li);
+      });
+      //in case for having new array
+      const newUserData = userData.map((index) => {
+        let li = document.createElement("li");
+        li.innerHTML = `- ${index.name} is ${index.age} years old.<span style='color:green'>&map</span>`;
+        ul1.appendChild(li);
+    });
+    ul1.style.listStyleType = 'decimal-leading-zero'
+    document.querySelector('body').appendChild(ul1);
+    </script>
+  </body>
+</html>

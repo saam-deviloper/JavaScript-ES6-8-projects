@@ -18,85 +18,209 @@
     ></script>
     <style>
       .img {
-        width: 320px;
-        height: 402px;
+        width: 250px;
+        height: auto;
       }
       .input {
         height: 50px;
         width: 50px;
+        font-size: 1.3em;
+        font-weight: bolder;
+        border-color: blue;
+      }
+      .btn {
+        margin-bottom: 8px;
+      }
+      #btnSubmit {
+        height: 40px;
+        transition: all 0.5s;
+        cursor: pointer;
+      }
+      #btnSubmit span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+      #btnSubmit span:after {
+        content: "\00bb";
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+      #btnSubmit:hover span {
+        padding-right: 25px;
+      }
+      #btnSubmit:hover span:after {
+        opacity: 1;
+        right: 0;
       }
     </style>
   </head>
   <body>
     <div class="container d-flex flex-column flex-fill text-center">
-      <span class="display-3 pb-2 text-muted bg-info">Hangman game</span>
-      <div class="bg-info .d-flex flex-row pt-3 pb-3">
-        <button class="btn btn-outline-light">A</button>
-        <button class="btn btn-outline-light">B</button>
-        <button class="btn btn-outline-light">C</button>
-        <button class="btn btn-outline-light">D</button>
-        <button class="btn btn-outline-light">E</button>
-        <button class="btn btn-outline-light">F</button>
-        <button class="btn btn-outline-light">G</button>
-        <button class="btn btn-outline-light">H</button>
-        <button class="btn btn-outline-light">I</button>
-        <button class="btn btn-outline-light">J</button>
-        <button class="btn btn-outline-light">K</button>
-        <button class="btn btn-outline-light">L</button>
-        <button class="btn btn-outline-light">M</button>
-        <button class="btn btn-outline-light">N</button>
-        <button class="btn btn-outline-light">O</button>
-        <button class="btn btn-outline-light">P</button>
-        <button class="btn btn-outline-light">R</button>
-        <button class="btn btn-outline-light">S</button>
-        <button class="btn btn-outline-light">T</button>
-        <button class="btn btn-outline-light">W</button>
-        <button class="btn btn-outline-light">Q</button>
-        <button class="btn btn-outline-light">Y</button>
-        <button class="btn btn-outline-light">Z</button>
+      <span class="display-3 pb-2 text-danger">Hangman game</span>
+      <div class=".d-flex flex-row pt-3 pb-3">
+        <button class="btn btn-outline-danger">A</button>
+        <button class="btn btn-outline-danger">B</button>
+        <button class="btn btn-outline-danger">C</button>
+        <button class="btn btn-outline-danger">D</button>
+        <button class="btn btn-outline-danger">E</button>
+        <button class="btn btn-outline-danger">F</button>
+        <button class="btn btn-outline-danger">G</button>
+        <button class="btn btn-outline-danger">H</button>
+        <button class="btn btn-outline-danger">I</button>
+        <button class="btn btn-outline-danger">J</button>
+        <button class="btn btn-outline-danger">K</button>
+        <button class="btn btn-outline-danger">L</button>
+        <button class="btn btn-outline-danger">M</button>
+        <button class="btn btn-outline-danger">N</button>
+        <button class="btn btn-outline-danger">O</button>
+        <button class="btn btn-outline-danger">P</button>
+        <button class="btn btn-outline-danger">R</button>
+        <button class="btn btn-outline-danger">S</button>
+        <button class="btn btn-outline-danger">T</button>
+        <button class="btn btn-outline-danger">W</button>
+        <button class="btn btn-outline-danger">Q</button>
+        <button class="btn btn-outline-danger">Y</button>
+        <button class="btn btn-outline-danger">Z</button>
+        <button class="btn btn-outline-danger">clear</button>
       </div>
-      <div class="">
-        <p class="display-5 bolder">6 <span>Chance</span></p>
-        <img src="img/hangmancrop1.png" alt="pic" class="img rounded" />
+      <div class=".d-flex row justify-content-around">
+        <p
+          id="questionBox"
+          class="row alert bg-info mt-2 w-50 justify-content-around"
+        >
+          <span></span>
+        </p>
+        <p class="display-5 bolder">6 chance to survive</p>
+        <img src="img/hangmancrop7.png" alt="pic" class="img rounded" />
       </div>
-      <div class="bg-danger .d-flex flex-row">
-        <input type="text" class="input border-secondary border-1 mt-3 mb-3" value=""/>
-        <input type="text" class="input border-secondary border-1 mt-3 mb-3" />
-        <input type="text" class="input border-secondary border-1 mt-3 mb-3" />
-        <input type="text" class="input border-secondary border-1 mt-3 mb-3" />
-
+      <div class="bg-gradient .d-flex flex-row">
+        <input
+          type="text"
+          class="input border-secondary rounded text-center border-1 mt-3 mb-3"
+          value=""
+        />
+        <input
+          type="text"
+          class="input border-secondary rounded text-center border-1 mt-3 mb-3"
+        />
+        <input
+          type="text"
+          class="input border-secondary rounded text-center border-1 mt-3 mb-3"
+        />
+        <input
+          type="text"
+          class="input border-secondary rounded text-center border-1 mt-3 mb-3"
+        />
+        <button id="btnSubmit" class="btn btn-outline-success mx-2">
+          <span>check</span>
+        </button>
       </div>
     </div>
     <script>
-       let btnchar = document.querySelectorAll(".btn-outline-light");
-       let txtbox = document.querySelectorAll(".input");
-       
-       const btnCharClicked = (e)=>{
-        console.log(e.target.innerText)
-       };
+      const questions = [
+        { soal: "oon chie k mooz e?", javab: "mooz" },
+        { soal: "oon chie k lime e?", javab: "lime" },
+        { soal: "oon chie k kiwi e?", javab: "kiwi" },
+        { soal: "oon chie k pear e?", javab: "pear" },
+        { soal: "oon chie k sloe e?", javab: "sloe" },
+      ];
+      let randNum = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+      console.log(randNum);
+      let btnchar = document.querySelectorAll(".btn-outline-danger");
+      let txtbox = document.querySelectorAll(".input");
+      let questionBox = document.querySelector("#questionBox");
+      let btnSubmit = document.querySelector("#btnSubmit");
+      let pic = document.querySelector(".img");
+      let charector = "";
+      let chance = 7;
+      let correctAnswer;
 
-       btnchar.forEach(element => {
-        element.addEventListener('click',btnCharClicked)
-       });
+      questionBox.innerText = questions[randNum - 1]["soal"];
+      correctAnswer = questions[randNum - 1]["javab"];
 
-       const txtboxClicked = (e)=>{
-           e.target.innerHTML='';
-       }
-       const txtboxKeydown = (e)=>{
-        let number = elem.value.length;
-           console.log(number)
-            if(number==0)
-            {
-                elem.innerHTML = e.target.innerText;
-            }
-            else
-                e.preventDefault()
-            
-       }
-       txtbox.forEach(elem=>{
-           elem.addEventListener('click',txtboxClicked)
-           elem.addEventListener('keydown',txtboxKeydown)
-       })
+      const btnCharClicked = (e) => {
+        charector = e.target.innerText;
+        if (charector == "clear") {
+          charector = "";
+        } else {
+          txtbox.value = charector;
+          console.log(charector);
+        }
+      };
+      btnchar.forEach((element) => {
+        element.addEventListener("click", btnCharClicked);
+      });
+
+      const txtboxClicked = (e) => {
+        //console.log(charector);
+        let itemToLowerCase = charector.toLocaleLowerCase();
+        e.target.value = itemToLowerCase;
+      };
+      console.log(txtbox);
+      //s,s
+      const txtboxKeydown = (e) => {
+        //console.log(e.keyCode);
+        e.preventDefault();
+      };
+
+      txtbox.forEach((elem) => {
+        elem.addEventListener("click", txtboxClicked);
+        elem.addEventListener("keydown", txtboxKeydown);
+      });
+
+      //button validation of anwser
+      btnSubmit.addEventListener("click", () => {
+        let cooncat =
+          txtbox[0].value + txtbox[1].value + txtbox[2].value + txtbox[3].value;
+        console.log(cooncat);
+        if (cooncat == correctAnswer) {
+          questionBox.innerText = "You Win! (5sec Reload)";
+          questionBox.setAttribute(
+            "class",
+            "row alert bg-success mt-2 w-50  justify-content-around"
+          );
+          setTimeout(() => {
+            txtbox[0].value = "";
+            txtbox[1].value = "";
+            txtbox[2].value = "";
+            txtbox[3].value = "";
+            location.reload();
+          }, 5000);
+        } else if (cooncat != correctAnswer && chance > 2) {
+          chance--;
+          pic.src = `img/hangmancrop${chance}.png`;
+          questionBox.setAttribute(
+            "class",
+            "row alert bg-danger mt-2 w-50  justify-content-around"
+          );
+          questionBox.innerText =
+            questions[randNum - 1]["soal"] + " wrong answer!,try again";
+          txtbox[0].value = "";
+          txtbox[1].value = "";
+          txtbox[2].value = "";
+          txtbox[3].value = "";
+        } else {
+          chance--;
+          pic.src = `img/hangmancrop${chance}.png`;
+          questionBox.setAttribute(
+            "class",
+            "row alert bg-danger mt-2 w-50  justify-content-around"
+          );
+          questionBox.innerText = "You loose!";
+          setTimeout(() => {
+            txtbox[0].value = "";
+            txtbox[1].value = "";
+            txtbox[2].value = "";
+            txtbox[3].value = "";
+            location.reload();
+          }, 5000);
+        }
+      });
     </script>
   </body>
 </html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODOlist</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      #dashboard {
+        background-color: white;
+        min-height: 40%;
+      }
+      #sidebar {
+        background-color: white;
+        min-height: 40%;
+      }
+      body {
+        background-color: rgba(228, 196, 19, 0.548);
+      }
+      #imgIcon {
+        width: auto;
+        height: 60px;
+      }
+      #inputTodo {
+        min-width: 50%;
+        width: auto;
+        margin-left: 8px;
+        border: none;
+        padding: 5px 10px 5px 5px;
+      }
+      #inputTodo:focus {
+        outline: none;
+        outline: 0;
+      }
+      #btnAdd.btn {
+        border-radius: 20px;
+        color: green;
+        outline: none;
+        outline: 0;
+        border: none;
+        background: none;
+      }
+      #btnAdd.btn :focus{
+        outline: none;
+        border: none;
+      }
+      #btnAdd.btn :active{
+        outline: none;
+        border: none;
+      }
+      td {
+        font-size: 18px;
+      }
+      input :checked {
+        outline: none;
+        border: rgba(238, 7, 7, 0.39);
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h3 class="display-3 text-center text-muted">Todo List</h3>
+        <!-- <img src="img/todoIcon.png" alt="" id="imgIcon" class="d-inline-flex"> -->
+      </div>
+      <div class="row">
+        <div
+          id="dashboard"
+          class="col-lg-8 col-md-12 col-sm-12 col-lg-8 rounded mt-2"
+        >
+          <h5 class="pt-3">Write down your tasks</h5>
+          <hr />
+          <p class="display-5">Today <span id="todaySpan"></span></p>
+          <table id="table1"></table>
+          <div >
+            <button class="btn" id="btnAddTask">&plus;</button>
+            <input
+              type="text"
+              id="inputTodo"
+              class=" rounded"
+              placeholder="type your new task..."
+            />
+          </div>
+        </div>
+        <!-- sidebar -->
+        <div
+          class="col-xl-3 col-sm-12 col-md-12 col-lg-3 mt-2 ms-xl-1 ms-lg-1 text-center rounded"
+          id="sidebar"
+        >
+          <h5 class="pt-3">Completed tasks</h5>
+          <hr />
+          <table id="table2" class="table-dark">
+            <tbody id="tbody-complete"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let btnAddTask = document.querySelector("#btnAddTask");
+    let inputTodo = document.querySelector("#inputTodo");
+    const date = new Date();
+    const todaySpan = document.getElementById("todaySpan");
+    todaySpan.innerHTML = date.toDateString();
+    todaySpan.setAttribute("class", "text-muted");
+    todaySpan.style.fontSize = "18px";
+    let table1 = document.getElementById("table1");
+    let tblBody = document.createElement("tblBody");
+    table1.setAttribute("class", "table table-striped ");
+    let table2 = document.querySelector("#table2");
+    tbodyComplete = document.querySelector("#tbody-complete");
+    table2.setAttribute("class", "table table-striped align-items-center ");
+
+    //completed tasks goes here
+
+    const itemChecked = (e) => {
+      parentLoc = e.srcElement.parentNode;
+      trLoc = parentLoc.parentNode;
+      let td1 = trLoc.childNodes[1];
+      let td2 = trLoc.childNodes[2];
+
+      if (e.target.checked) {
+        td1.style.textDecoration = "line-through";
+        td2.style.textDecoration = "line-through";
+
+        let trComp = document.createElement("tr");
+        let tdItem = document.createElement("td");
+        let tdDate = document.createElement("td");
+
+        localStorage.setItem("data", td1.innerHTML);
+        localStorage.setItem("date", td2.innerHTML);
+        tdItem.innerText = localStorage.getItem("data");
+        tdDate.innerText = localStorage.getItem("date");
+
+        trComp.appendChild(tdItem);
+        trComp.appendChild(tdDate);
+        tbodyComplete.appendChild(trComp);
+      } else {
+        td1.style.textDecoration = "";
+        td2.style.textDecoration = "";
+      }
+    };
+
+    const addItem = (e) => {
+      if (inputTodo.value != "") {
+        let checkBox = document.createElement("input");
+        checkBox.type = "checkbox";
+        checkBox.addEventListener("change", itemChecked);
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+
+        td1.innerHTML = inputTodo.value;
+        td2.innerHTML = date.toDateString();
+        // checkBox.type = 'checkbox';
+        td3.appendChild(checkBox);
+        tr.appendChild(td3);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tblBody.appendChild(tr);
+        table1.appendChild(tblBody);
+      } else alert("first fill the input");
+    };
+    btnAddTask.addEventListener("click", addItem);
+  </script>
+</html>
